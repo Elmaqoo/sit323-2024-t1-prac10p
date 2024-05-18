@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cal-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cal-app
+  template:
+    metadata:
+      labels:
+        app: cal-app
+    spec:
+      containers:
+      - name: cal-app
+        image: gcr.io/sit323-2024-t1-prac10p/calculator-app:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MONGODB_URI
+          value: "mongodb://myUser:myPassword@mongodb-service:27017/mydatabase"
